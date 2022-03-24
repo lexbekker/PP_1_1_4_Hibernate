@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        try (Connection con = Util.getConnection()){
             UserServiceImpl userService = new UserServiceImpl();
             userService.createUsersTable();
             userService.saveUser("Alex", "Bekker", (byte) 25);
@@ -17,9 +16,6 @@ public class Main {
             userService.saveUser("Veronika", "Bekker", (byte) 20);
             userService.getAllUsers().forEach(System.out::println);
             userService.dropUsersTable();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+            Util.closeConnection();
     }
 }
