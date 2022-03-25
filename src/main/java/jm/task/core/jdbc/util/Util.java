@@ -9,11 +9,15 @@ public class Util {
     private static Connection con;
 
     public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         if (con == null) {
             con = DriverManager.getConnection(url, user, password);
         }
-        con.setAutoCommit(false);
-        return con;
+       return con;
     }
 
     public static void closeConnection() {
